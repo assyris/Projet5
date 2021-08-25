@@ -3,35 +3,32 @@ const URL = "http://localhost:3000/teddies/";
 
 let Params = new URLSearchParams(window.location.search);
 let id = Params.get('id');
-if (id === null) {
-    Params = "";
-} else {
-    Params = id;
-}
 
-// promise pour la requete API avec méthode Fetch
-getApiData = () => {
-    return new Promise((objectList) => {
+
+apiData = function() {
+    return new Promise(function (productList) {
         let requestOptions = {
-            method: 'GET', // utilisation de la methode GET
+            method: 'GET',
             redirect: 'follow'
         };
         fetch((URL + Params), requestOptions)
-            .then(response => response.json())
-            .then(result => objectList(result))
-            .catch(error => {
-                // en cas d'erreur de chargement de l'API affichage d'un message sur l'écran de l'utilisateur + message d'erreur dans la console
+            .then(function (response) { 
+                return response.json();
+            })
+            .then(function (res) { 
+                return productList(res);
+            })
+            .catch(function (err) {
                 apiFail = document.querySelector('.bloc');
-                apiFail.classList.add('fail__msg');
+                apiFail.classList.add('msg__fail');
                 apiFail.innerHTML = "Veuillez démarrer le serveur";
-                console.error(error);
+                console.error(err);
             });
     });
 };
 
-//fonction pour l'affichage des produits sur la page index
-async function objectsList() {
-    let teddies = await getApiData();
+async function productList() {
+    let teddies = await apiData();
     console.log(teddies);
 
     let teddiesList = document.querySelector('.bloc');
@@ -40,32 +37,31 @@ async function objectsList() {
 
     teddiesList.appendChild(blocTitle);
 
-    // création d'une boucle pour l'affichage en liste des objets
     for (let teddy of teddies) {
 
-        let cardElt = document.createElement('article');
-        let contentElt = document.createElement('div');
-        let picElt = document.createElement('img')
-        let nameElt = document.createElement('h3');
-        let descriptionElt = document.createElement('p');
-        let btnElt = document.createElement('a');
+        let card = document.createElement('article');
+        let content = document.createElement('div');
+        let pic = document.createElement('img')
+        let name = document.createElement('h3');
+        let description = document.createElement('p');
+        let btn = document.createElement('a');
         
-        picElt.src = teddy.imageUrl;
-        nameElt.textContent = teddy.name;
-        descriptionElt.textContent = teddy.description;
-        btnElt.textContent = "Acheter le produit";
+        pic.src = teddy.imageUrl;
+        name.textContent = teddy.name;
+        description.textContent = teddy.description;
+        btn.textContent = "Acheter le produit";
 
-        teddiesList.appendChild(cardElt);
-        cardElt.appendChild(picElt);
-        cardElt.appendChild(contentElt)
-        contentElt.appendChild(nameElt);
-        contentElt.appendChild(descriptionElt);
-        contentElt.appendChild(btnElt);
+        teddiesList.appendChild(card);
+        card.appendChild(pic);
+        card.appendChild(content)
+        content.appendChild(name);
+        content.appendChild(description);
+        content.appendChild(btn);
 
-        cardElt.classList.add('card');
-        picElt.classList.add('card__pics');
-        contentElt.classList.add('card__content');
-        btnElt.classList.add('card__btn');
+        card.classList.add('card');
+        pic.classList.add('card__pics');
+        content.classList.add('card__content');
+        btn.classList.add('card__btn');
 
       
     };
