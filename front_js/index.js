@@ -1,4 +1,4 @@
-const getTeddies =  async function() {
+const getTeddies = async function() {
     try {
         let response = await fetch('http://localhost:3000/teddies/');
         if (response.ok) {
@@ -13,7 +13,7 @@ const getTeddies =  async function() {
                 div.className = 'teddies';
         
                 const productLink = document.createElement("a");
-                productLink.href = "produit.html?id=" + teddy._id;
+                productLink.href = "./pages/produit.html?id=" + teddy._id;
                 div.appendChild(productLink);
                 productLink.className = 'produit';
 
@@ -23,7 +23,7 @@ const getTeddies =  async function() {
 
                 const ref = document.createElement('div');
                 productLink.appendChild(ref);
-                ref.className = 'teddiesRef';
+                ref.className = 'ref';
         
                 const titleRef = document.createElement('h3');
                 ref.appendChild(titleRef);
@@ -31,12 +31,12 @@ const getTeddies =  async function() {
         
                 const paragRef = document.createElement('p');
                 ref.appendChild(paragRef);
-                paragRef.textContent = teddy.price / 100 + " €";
+                paragRef.textContent = teddy.price + " €";
             }
         } 
     } catch (error) {
         alert("Erreur : " + error);
-        apiError = document.querySelector('.bloc');
+        apiError = document.querySelector('#bloc');
         apiError.classList.add('msg__error');
         apiError.innerHTML = "Veuillez démarrer le serveur";
         console.error(err);
