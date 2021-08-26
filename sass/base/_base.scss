@@ -1,4 +1,5 @@
 
+
 header {
     margin: 0 auto;
     width: 100%;
@@ -17,39 +18,29 @@ a {
     height: 200px;
 }
 #bloc {   
-    overflow: hidden;
-    border: 3px solid black;
-    border-radius:0 0 10px 10px;
-    width: 60%;
-    min-height: 100px;
-    margin:0 auto 10px auto;
-    background-color: black;
+    width: 100%;
+    margin: auto;
     text-align: center;
     padding: 0;
-    display: flex;
-    flex-direction: column;   
-    h2 {
-        margin: auto;
-    }
-    h3 {
-        margin: auto;
-    }
+    display: flex;   
+    flex-wrap: wrap;
     img {
         width: 100%;
-        height: 25%;
+        height: 25rem;
         margin-bottom: 0;
     }
     p {
         margin-top: 20px;
     }
-    table {
-        width: 100%;
-        margin: auto;
-        border-collapse: collapse;
-        background-color: black;
-        color: black;      
-    }
-}    
+} 
+.teddies {
+    width: 40%;
+    height: 30rem;
+    margin: 3rem auto;
+    overflow: hidden;
+    border-radius: 5%;
+    border: 3px solid black;
+}  
 footer {
     align-items: center;
     width: 100%;
