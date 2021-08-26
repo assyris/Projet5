@@ -1,0 +1,74 @@
+header {
+  margin: 0 auto;
+  width: 100%;
+}
+
+header img {
+  align-items: center;
+  margin-top: 30px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.navtop, .navbot {
+  display: flex;
+}
+
+.container-fluid {
+  height: 200px;
+}
+
+#bloc {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+#bloc img {
+  width: 100%;
+  height: 25rem;
+  margin-bottom: 0;
+}
+#bloc p {
+  margin-top: 20px;
+}
+
+.teddies {
+  width: 40%;
+  height: 30rem;
+  margin: 3rem auto;
+  overflow: hidden;
+  border-radius: 5%;
+  border: 3px solid black;
+}
+
+footer {
+  align-items: center;
+  width: 100%;
+}
+
+body {
+  font-size: 16px;
+}
+
+.bloc p {
+  color: black;
+}
+.bloc h2 {
+  font-size: 2.5em;
+  color: white;
+}
+.bloc h3 {
+  font-size: 1.8em;
+}
+
+.msg__error {
+  font-size: 48px;
+  color: white;
+}
+
+/*# sourceMappingURL=style.css.map */
