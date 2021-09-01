@@ -1,75 +1,93 @@
+basketPreview();
+
 const params = new URL(document.location).searchParams;
-const id = params.get("id");
+const id = params.get("_id");
 console.log(id);
 
-const getTeddies = async function() {
-    try {
-        let response = await fetch('http://localhost:3000/teddies/' + id);
-        if (response.ok) {
-            let teddy = await response.json();
-            console.log(teddy);
+fetch('http://localhost:3000/api/teddies/' + id)
+    .then(function(response) {
+       return response.json()
+    })
+    .then(function(data) {
+        const product = data;
+        blocProduct(data);
 
-            const main = document.getElementById('product_page');
-            const h2 = document.createElement('h2');
-            main.appendChild(h2);
-            h2.textContent = teddy.name;
+        function blocProduct(product) {
+    
+                const bloc = document.getElementById("bloc_product");       
+                bloc.innerHTML += `
+                    <div class="col-sm-12 col-md-6 col-lg-6 pb-3  ">
+                        <div class="card border bg-light shadow p-3 mb-5 bg-body rounded">
+                            <div class="card-body">
+                                <div class="row">
+                                    <img src="${product.imageUrl}" class="img-fluid img-thumbnail p-1" alt="${product.name}"></a>
+                                    <div class="col-6 col-sm-7 mt-3" >
+                                        <h5 class="card-title">${product.name}</h5>
+                                    </div>
+                                    <div class="col-6 col-sm-5 text-end mt-3">
+                                        <h5 class="card-title">${product.price / 100 + "€"}</h5>
+                                    </div>
+                                    <div class="col-5 col-sm-3 col-md-5 col-lg-4 col-xl-3 my-auto">
+                                        <p>Quantité :</p>
+                                    </div>
+                                    <div class="col-4 col-sm-3 col-md-4 col-lg-3 ">
+                                        <input type="number" id="quantity" min="1" max="100" placeholder="0" class="form-select mb-3" aria-label="Quantité">
+                                    </div>
+                                    <select id="option" class="form-select mb-3" aria-label="choisir la version">
+                                    </select>
+                                    <button id="btnAddBasket" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">Ajouter au panier
+                                    </button>
+                                </div>
+                                <p class="card-text text-truncate">${product.description}</p>                
+                            </div>
+                        </div>
+                    </div>`;
+                    addcolor(product);
+        }
 
-            const div = document.createElement('div');
-            main.appendChild(div);
-            div.className = 'teddy_ref';
+        function addcolor(product) {
+            const colorChoice = document.getElementById("option");
+            for (let color of product.colors) {
+                colorChoice.innerHTML += `<option value="${color}">${color}</option>`;
+            }
+        }
+        const btnAddBasket = document.getElementById("btnAddBasket");
+        btnAddBasket.addEventListener("click", function(e) {
+            e.preventDefault();
+            const option = document.getElementById("option");
+            const quantity = document.getElementById("quantity");
 
-            const img = document.createElement('img');
-            div.appendChild(img);
-            img.setAttribute('src', teddy.imageUrl);
+            // créer un nouveau produit
+            let objectProduct = new Product(
+                id,
+                product.name,
+                product.description,
+                product.price,
+                option.value,
+                quantity.value,
+                product.imageUrl
+            );
+            // vérifie s'il est déja présent
+            // si oui, dejaPresent en true et sauvegarde sa place dans le localStorage
+            let productPresent = false;
+            let modification;
+            for (products of basket) {
+                switch (products.option) {
+                    case objectProduct.option:
+                        productPresent = true;
+                        modification = basket.indexOf(products);
+                }
+            }
 
-            const divInfo = document.createElement('div');
-            div.appendChild(divInfo);
-            divInfo.className = 'teddy_info';
+            // si déjaPresent incrémente seulement la quantité
+            if (productPresent) {
+                basket[modification].quantity = basket[modification].quantity + objectProduct.quantity;
+                localStorage.setItem("teddy", JSON.stringify(basket));
+                // si non, ajoute le produit au localStorage
+            } else {
+                basket.push(objectProduct);
+                localStorage.setItem("teddy", JSON.stringify(basket));
+            }
+        });
 
-            const h3 = document.createElement('h3');
-            divInfo.appendChild(h3);
-            h3.textContent = teddy.name;
-
-            const parag = document.createElement('p');
-            divInfo.appendChild(parag);
-            parag.textContent = teddy.description;
-
-            const price = document.createElement('p');
-            divInfo.appendChild(price);
-            price.textContent = "Son prix : " + teddy.price / 100 + " €";
-            price.className = 'teddy_price';
-
-            const form = document.createElement('form');
-            divInfo.appendChild(form);
-            const formDiv = document.createElement('div');
-            form.appendChild(formDiv);
-            formDiv.className = 'colors_choice';
-
-            const label = document.createElement('label');
-            formDiv.appendChild(label);
-            label.textContent = "Personnalisez sa couleur : ";
-            label.setAttribute('for', "Choix de couleurs de " + teddy.name);
-
-            const select = document.createElement('select');
-            formDiv.appendChild(select);
-            select.setAttribute('name', "Choix de couleurs de " + teddy.name);
-            select.setAttribute('id', "select_1 ");
- 
-            const colors = teddy.colors;
-
-            for (i = 0; i < colors.length; i++) {
-                const selectOption = document.createElement('option');
-                select.appendChild(selectOption);
-                selectOption.textContent = colors[i];
-                selectOption.setAttribute("value", colors[i]);
-            }     
-        } else {
-            alert('Erreur rencontrée : ' + response.status);
-        } 
-    } catch (error) {
-        alert("Erreur : " + error);
-    }
-};
-
-//appel de la fonction getTeddies
-getTeddies();
+});

@@ -9,39 +9,70 @@
     <title>Produit</title>
 
     <link rel="stylesheet" href="../css/style.css" />
-
+    
 </head>
 
 <body>
 
-    <header>
-        <div class="container-fluid bg-dark">
-            <img src="../images/logo_orinoco.png">
-            <nav class="navtop">                    
-                <a class="nav-link acivet" href="./index.html" id="acceuil">Accueil</a>
-                <a class="nav-link" href="./pages/panier.html">panier</a>
-            </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark ">
+        <div class="container-fluid mx-2 mx-lg-5">
+            <img class="img-fluid mx-4 mx-lg-0 mr-auto w-25" src="../backend/images/logo_orinoco.png" alt="logo orinoco"/>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                    aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse ms-4 " id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="panier.html" id="basketPreview">Panier</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <section id="product_page">
+    <section id="bloc_product">
 
     </section>
+
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Produit ajouté</h5>
+            </div>
+            <div class="modal-body">
+                <p>Votre produit a bien été ajouté au panier</p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-secondary" type="button" href="panier.html">Voir mon panier</a>
+                <a class="btn btn-success" type="button" href="../index.html">Continuer mes achats</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <footer>
         <div class="container-fluid bg-dark">
             <nav class="navbot">
-                <a href="#acceuil" class="nav-link acive">acceuil</a>
+                <a href="../index.html" class="nav-link acive">acceuil</a>
                 <a href="mailto:contact@orinoco.com" class="nav-link">Contact</a>
             </nav>    
         </div>
     </footer>
 
-<script src="../front_js/product.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/0f91d2e83a.js" crossorigin="anonymous"></script>
+    <script src="../front_js/function.js"></script>
+    <script src="../front_js/product.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 </body>
