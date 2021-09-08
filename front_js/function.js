@@ -1,22 +1,7 @@
 const basket = JSON.parse(localStorage.getItem("teddy")) || [];
 console.log(basket);
 
-
-// création de la class produit
-class Product {
-    constructor(id, name, description, price, option, quantity, imgurl) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = +price;
-        this.option = option;
-        this.quantity = +quantity;
-        this.imgurl = imgurl;
-    }
-}
-
-// calcul du total
-function displayTotalBasket() {
+function totalBasket() {
     let totalBasket = 0;
     basket.forEach( function(product) {
         totalBasket = totalBasket + product.price * product.quantity;
@@ -24,8 +9,8 @@ function displayTotalBasket() {
     return totalBasket;
 }
 
-//ajoute le tableau de commande
-function displayProductListTable(product) {
+
+function productListTable(product) {
     const indexProduct = basket.indexOf(product);
     const productList = document.getElementById("productsBasket");
     productList.innerHTML += `
@@ -40,9 +25,10 @@ function displayProductListTable(product) {
             <span>${product.option}</span>
         </td>
         <td class="align-middle productQuantity">
-            <button type="button" class="rounded clear data-toggle="modal" data-target="#exampleModal" data-index="${indexProduct}"><span class="fas fa-minus-square text-danger" data-index="${indexProduct}"></span></button>
+            <button type="button" class="empty minus data-toggle="modal" data-target="#exampleModal" data-index="${indexProduct}"><span class="fas fa-minus-square text-danger" data-index="${indexProduct}"></span></button>
             <span class="mx-0 mx-lg-3"> ${product.quantity}</span>
-            <button type="button" class="rounded add" data-toggle="modal" data-target="#exampleModal" data-index="${indexProduct}"><span class="fas fa-plus-square text-success" data-index="${indexProduct}"></span></button>
+            <button type="button" class="empty add" data-toggle="modal" data-target="#exampleModal" data-index="${indexProduct}"><span class="fas fa-plus-square text-success" data-index="${indexProduct}"></span></button>
+            <button type="button" class="empty clear" data-toggle="modal" data-target="#exampleModal" data-index="${indexProduct}"><span class="fas fa-times-circle text-danger" data-index="${indexProduct}"></span></button>
         </td>
         <td class="align-middle">
             <span>${(product.price / 100 + "€")}</span>
@@ -53,13 +39,11 @@ function displayProductListTable(product) {
     </tr>`;
 }
 
-//affiche le totalBasket
 function totalPrice() {
     const totalPrice = document.getElementById("totalPrice");
-    totalPrice.innerHTML += `${(displayTotalBasket() / 100 + "€")}`;
+    totalPrice.innerHTML += `${(totalBasket() / 100 + "€")}`;
 }
 
-// calcul du basketPreview
 function basketPreview() {
     if (basket.length == 0) {
     } else {
@@ -72,7 +56,6 @@ function basketPreview() {
     }
 }
 
-// supprimer le Panier
 function clearBasket() {
     localStorage.clear();
 }
