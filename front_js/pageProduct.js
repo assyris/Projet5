@@ -17,36 +17,31 @@ fetch('http://localhost:3000/api/teddies/' + id)
             const option = document.getElementById("option");
             const quantity = document.getElementById("quantity");
 
-            // créer un nouveau produit
-            let objectProduct = new Product(
-                id,
-                data.name,
-                data.description,
-                data.price,
-                option.value,
-                quantity.value,
-                data.imageUrl
-            );
-            // vérifie s'il est déja présent
-            // si oui, dejaPresent en true et sauvegarde sa place dans le localStorage
-            let productPresent = false;
-            let modification;
-            for (products of basket) {
-                if (products.option == objectProduct.option) {
-                        productPresent = true;
-                        modification = basket.indexOf(products);
-                }
+            const objFromProduct = {...data, _id: id, option: option.value, quantity: parseInt(quantity.value, 10)}
+            const objectProduct = new Product(objFromProduct);
+
+            let newBasket = [];
+            if( basket.length === 0 ) {
+                newBasket.push(objectProduct);
             }
 
-            // si déjaPresent incrémente seulement la quantité
-            if (productPresent) {
-                basket[modification].quantity = basket[modification].quantity += objectProduct.quantity;
-                localStorage.setItem("teddy", JSON.stringify(basket));
-                // si non, ajoute le produit au localStorage
-            } else {
-                basket.push(objectProduct);
-                localStorage.setItem("teddy", JSON.stringify(basket));
+            if( basket.length > 0 ) {
+                newBasket = basket.map( item => {
+                    if(item._id === objectProduct._id && item.option === objectProduct.option){
+                        if( item.quantity === objectProduct.quantity) {
+                            item.quantity += 1;
+                        } else {
+                            item.quantity += objectProduct.quantity;
+                        }
+                    }
+                    return new Product({...item});
+                });
+
+                if(!newBasket.find( item => objectProduct._id === item._id)) {
+                    newBasket.push(objectProduct);
+                }
             }
+            localStorage.setItem("teddy", JSON.stringify(newBasket));
         });
 
 });
