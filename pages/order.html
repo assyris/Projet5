@@ -5,16 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-    <title>Orinoco</title>
+
+    <title>order</title>
+
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark ">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-5">
         <div class="container-fluid mx-2 mx-lg-5">
-            <img class="img-fluid mx-4 mx-lg-0 mr-auto w-25" src="../backend/images/logo_orinoco.png" alt="logo orinoco" />
+            <img class="img-fluid mx-4 mx-lg-0 mr-auto w-25" src="../backend/images/logo_orinoco.png"  alt="logo orinoco"/>
+    
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                     aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -22,10 +24,7 @@
             <div class="collapse navbar-collapse ms-4 " id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link active text-white" aria-current="page" href="../index.html">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active text-white" href="panier.html" id="basketPreview">Panier</a>
+                        <a class="nav-link active" aria-current="page" href="../index.html">Accueil</a>
                     </li>
                 </ul>
             </div>
@@ -68,13 +67,12 @@
 </div>
 
 
-<footer>
-    <div class="container-fluid bg-dark">
-        <nav class="navbot">
-            <a href="#acceuil" class="nav-link acive text-white">acceuil</a>
-            <a href="mailto:contact@orinoco.com" class="nav-link text-white">Contact</a>
-        </nav>    
-    </div>
+<footer class="navbar-dark bg-dark py-3">
+    <ul class="list-inline text-center">
+        <li class="list-inline-item"><a class="nav-link text-white" href="../index.html" title="Accueil">Accueil</a></li>
+        <li class="list-inline-item"><a class="nav-link text-white" href="mailto:contact@orinoco.com" title="Contact">Contact</a></li>
+    </ul>
+    <p class="copyright text-center text-white">Orinoco©2021</p>
 </footer>
 
 

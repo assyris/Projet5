@@ -25,7 +25,7 @@ function productListTable(product) {
             <span>${product.option}</span>
         </td>
         <td class="align-middle productQuantity">
-            <button type="button" class="empty minus data-toggle="modal" data-target="#exampleModal" data-index="${indexProduct}"><span class="fas fa-minus-square text-danger" data-index="${indexProduct}"></span></button>
+            <button type="button" class="empty minus" data-toggle="modal" data-target="#exampleModal" data-index="${indexProduct}"><span class="fas fa-minus-square text-danger" data-index="${indexProduct}"></span></button>
             <span class="mx-0 mx-lg-3"> ${product.quantity}</span>
             <button type="button" class="empty add" data-toggle="modal" data-target="#exampleModal" data-index="${indexProduct}"><span class="fas fa-plus-square text-success" data-index="${indexProduct}"></span></button>
             <button type="button" class="empty clear" data-toggle="modal" data-target="#exampleModal" data-index="${indexProduct}"><span class="fas fa-times-circle text-danger" data-index="${indexProduct}"></span></button>
@@ -48,13 +48,14 @@ function basketPreview() {
     if (basket.length === 0) {
         console.log("Le panier est vide !");
         return;
+    } else {
+        let addBasketPreview = document.getElementById("basketPreview");
+        let calculBasketPreview = 0;
+        for (product of basket) {
+            calculBasketPreview += product.quantity;
+        }
+        addBasketPreview.innerHTML = `Panier <span class="badge rounded-pill bg-secondary align-middle my-auto">${calculBasketPreview}</span>`;
     }
-    let addBasketPreview = document.getElementById("basketPreview");
-    let calculBasketPreview = 0;
-    for (product of basket) {
-        calculBasketPreview += product.quantity;
-    }
-    addBasketPreview.innerHTML = `Panier <span class="badge rounded-pill bg-secondary align-middle my-auto">${calculBasketPreview}</span>`;
 }
 
 function clearBasket() {

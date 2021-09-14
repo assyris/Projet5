@@ -1,5 +1,3 @@
-
-
 header {
     margin: 0 auto;
     width: 100%;
@@ -11,36 +9,26 @@ header img {
 a {
     text-decoration: none;
 }
+.nav-item {
+    padding-top: 1rem;
+    padding-left: 1rem;
+}
+.card {
+    height: 500px;
+}
+.blocimg {
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+}
+.imgindex {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
 .navtop, .navbot {
     display: flex;
 }
-.container-fluid {
-    height: 200px;
-}
-#bloc {   
-    width: 100%;
-    margin: auto;
-    text-align: center;
-    padding: 0;
-    display: flex;   
-    flex-wrap: wrap;
-    img {
-        width: 100%;
-        height: 25rem;
-        margin-bottom: 0;
-    }
-    p {
-        margin-top: 20px;
-    }
-} 
-.teddies {
-    width: 40%;
-    height: 30rem;
-    margin: 3rem auto;
-    overflow: hidden;
-    border-radius: 5%;
-    border: 3px solid black;
-}  
 footer {
     align-items: center;
     width: 100%;

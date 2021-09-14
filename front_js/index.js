@@ -19,11 +19,11 @@ function blocProducts(data) {
     for (product of data) {
         const bloc = document.getElementById("bloc_products");       
         bloc.innerHTML += `
-      <div class="col-sm-12 col-md-6 col-lg-6 pb-3  ">
-          <div class="card border bg-light shadow p-3 mb-5 bg-body empty">
+      <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="card border bg-light shadow p-3 mb-5 bg-body empty" >
               <div class="card-body">
                   <div class="row">
-                      <a href="./pages/produit.html?_id=${product._id}"><img src="${product.imageUrl}" class="img-fluid img-thumbnail p-1" alt="${product.name}"></a>
+                      <a class="blocimg" href="./pages/produit.html?_id=${product._id}"><img src="${product.imageUrl}" class="imgindex img-fluid img-thumbnail p-1" height="100" alt="${product.name}"></a>
                       <div class="col-6 col-sm-7 mt-3" >
                           <h5 class="card-title">${product.name}</h5>
                       </div>
@@ -32,7 +32,7 @@ function blocProducts(data) {
                       </div>
                   </div>
                   <p class="card-text text-truncate">${product.description}</p>
-                  <a href="./pages/produit.html?_id=${product._id}" class="btn btn-secondary">Acheter ce produit</a>
+                  <a href="./pages/produit.html?_id=${product._id}" class="btn btn-primary">Acheter ce produit</a>
               </div>
           </div>
       </div>`;

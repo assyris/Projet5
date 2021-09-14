@@ -50,7 +50,7 @@ function blocProduct(data) {
     
     const bloc = document.getElementById("bloc_product");       
     bloc.innerHTML += `
-        <div class="col-sm-12 col-md-6 col-lg-6 pb-3  ">
+        <div class="col-12">
             <div class="card border bg-light shadow p-3 mb-5 bg-body empty">
                 <div class="card-body">
                     <div class="row">
@@ -69,7 +69,7 @@ function blocProduct(data) {
                         </div>
                         <select id="option" class="form-select mb-3" aria-label="choisir la version">
                         </select>
-                        <button id="btnAddBasket" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">Ajouter au panier
+                        <button id="btnAddBasket" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Ajouter au panier
                         </button>
                     </div>
                     <p class="card-text text-truncate">${data.description}</p>                
