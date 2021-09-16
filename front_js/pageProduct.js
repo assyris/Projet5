@@ -10,8 +10,60 @@ fetch('http://localhost:3000/api/teddies/' + id)
     })
     .then(function(data) {
         blocProduct(data);
-   
-        const btnAddBasket = document.getElementById("btnAddBasket");
+        addNewProduct(data);      
+});
+
+function blocProduct(data) {   
+    const bloc = document.getElementById("bloc_product");       
+    bloc.innerHTML += `
+        <div class="jumbotron mx-3 my-5">
+            <div class="card px-0 mx-3 my-4 border-0 empty">
+                <div class="row mx-0 g-0 shadow p-3 bg-body">
+                    <div class="col-md-7">
+                        <img src="${data.imageUrl}" class="img-fluid img-thumbnail shadow" alt="${data.name}">
+                    </div>
+                    <div class="col-md-5" >
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6 col-sm-7 mt-3">
+                                    <h5 class="card-title">${data.name}</h5>
+                                </div>   
+                                <div class="col-6 col-sm-5 text-end mt-3 pt-1">
+                                    <h6 class="card-title">${data.price / 100 + "€"}</h6>
+                                </div>
+                            </div>
+                            <select id="option" class="form-select mb-3" aria-label="choisir la version">
+                            </select>
+                            <div class="mb-3">
+                                <p class="card-text">${data.description}</p>
+                            </div>   
+                            <div class="row">    
+                                <div class="col-5 col-sm-3 col-md-5 col-lg-4 col-xl-3 my-auto">
+                                    <p>Quantité :</p>
+                                </div>
+                                <div class="col-4 col-sm-3 col-md-4 col-lg-3">
+                                    <input type="number" id="quantity" min="1" max="100" placeholder="0" class="form-select mb-3" aria-label="Quantité">
+                                </div>
+                            </div>    
+                            <button id="btnAddBasket" class="btn btn-primary m-2" data-toggle="modal" data-target="#myModal">Ajouter au panier</button>
+                        </div>
+                    </div>
+                                   
+                </div>
+            </div>
+        </div>`;
+        addcolor(data);
+}
+
+function addcolor(data) {
+    const colorChoice = document.getElementById("option");
+    for (let color of data.colors) {
+        colorChoice.innerHTML += `<option value="${color}">${color}</option>`;
+    }
+}
+
+function addNewProduct(data) {
+    const btnAddBasket = document.getElementById("btnAddBasket");
         btnAddBasket.addEventListener("click", function(e) {
             e.preventDefault();
             const option = document.getElementById("option");
@@ -44,44 +96,4 @@ fetch('http://localhost:3000/api/teddies/' + id)
             localStorage.setItem("teddy", JSON.stringify(newBasket));
         });
 
-});
-
-function blocProduct(data) {
-    
-    const bloc = document.getElementById("bloc_product");       
-    bloc.innerHTML += `
-        <div class="col-12">
-            <div class="card border bg-light shadow p-3 mb-5 bg-body empty">
-                <div class="card-body">
-                    <div class="row">
-                        <img src="${data.imageUrl}" class="img-fluid img-thumbnail p-1" alt="${data.name}"></a>
-                        <div class="col-6 col-sm-7 mt-3" >
-                            <h5 class="card-title">${data.name}</h5>
-                        </div>
-                        <div class="col-6 col-sm-5 text-end mt-3">
-                            <h5 class="card-title">${data.price / 100 + "€"}</h5>
-                        </div>
-                        <div class="col-5 col-sm-3 col-md-5 col-lg-4 col-xl-3 my-auto">
-                            <p>Quantité :</p>
-                        </div>
-                        <div class="col-4 col-sm-3 col-md-4 col-lg-3 ">
-                            <input type="number" id="quantity" min="1" max="100" placeholder="0" class="form-select mb-3" aria-label="Quantité">
-                        </div>
-                        <select id="option" class="form-select mb-3" aria-label="choisir la version">
-                        </select>
-                        <button id="btnAddBasket" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Ajouter au panier
-                        </button>
-                    </div>
-                    <p class="card-text text-truncate">${data.description}</p>                
-                </div>
-            </div>
-        </div>`;
-        addcolor(data);
-}
-
-function addcolor(data) {
-    const colorChoice = document.getElementById("option");
-    for (let color of data.colors) {
-        colorChoice.innerHTML += `<option value="${color}">${color}</option>`;
-    }
 }

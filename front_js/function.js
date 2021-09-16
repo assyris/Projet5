@@ -16,7 +16,7 @@ function productListTable(product) {
     productList.innerHTML += `
     <tr class="text-center">
         <td class="w-25">
-            <img src="${product.imgurl}" class="img-fluid img-thumbnail" alt="${product.name}">
+            <img src="${product.imageUrl}" class="img-fluid img-thumbnail" alt="${product.name}">
         </td>
         <td class="align-middle">
             <span>${product.name}</span>
@@ -48,10 +48,11 @@ function basketPreview() {
     if (basket.length === 0) {
         console.log("Le panier est vide !");
         return;
-    } else {
+    } if (basket.length > 0 && basket[0] !== null) {
         let addBasketPreview = document.getElementById("basketPreview");
         let calculBasketPreview = 0;
-        for (product of basket) {
+        console.log(basket);
+        for (product of basket) {          
             calculBasketPreview += product.quantity;
         }
         addBasketPreview.innerHTML = `Panier <span class="badge rounded-pill bg-secondary align-middle my-auto">${calculBasketPreview}</span>`;

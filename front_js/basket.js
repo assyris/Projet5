@@ -1,8 +1,8 @@
-
 basketPreview();
 
 const orderForm = document.getElementById("orderForm");
 const emptyBasket = document.getElementById("emptyBasket");
+
 
 if (basket.length < 1) {
     orderForm.classList.add("d-none");
@@ -57,7 +57,6 @@ if (basket.length < 1) {
         clear.addEventListener("click", clearProduct);
     }
 
-
     totalPrice();
 
     const validationBasket = document.getElementById("validationBasket");
@@ -72,11 +71,15 @@ if (basket.length < 1) {
         clearBasket();
         location.reload();
     });
+    postOrder();
+    
 
+}
+
+function postOrder() {
     const order = document.getElementById("order");
     const regexMail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/;
     const checkBox = document.getElementById("check");
-
     order.addEventListener("click", function(e) {
         
         let contact = {
@@ -98,32 +101,30 @@ if (basket.length < 1) {
             e.preventDefault();        
             
             let products = [];
-            for (listId of basket) {
-                products.push(listId.id);
+            for (productsId of basket) {
+                products.push(productsId.id);
             }
 
             fetch("http://localhost:3000/api/teddies/order", {
                 method: "POST",
                 headers: {
                     "Accept": "application/json",
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ contact, products }),
             })
-                .then( function(res) {
-                    return res.json()
-                })
-                .then( function(data) {
-                    localStorage.setItem("order", JSON.stringify(data));
-                    document.location.href = "order.html";
-                })
-                .catch( function(err) {
-                    console.log("erreur : " + err)
-                });
+            .then((response) => response.json())
+            .then((data) => {
+                localStorage.setItem("order", JSON.stringify(data));
+                document.location.href = "order.html";
+                 // clearBasket();
+            })
+            .catch((err) => console.log("erreur : " + err));
+            
         } else {
             alert( "Veuillez correctement renseigner l'entièreté du formulaire pour valider votre commande."
             );
         }
     });
-
-}
+} 
+    

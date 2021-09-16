@@ -18,13 +18,3 @@ for (product of basket) {
 }    
 
 totalPrice();
-
-const deletedItem = document.getElementsByClassName("empty");
-for(element of deletedItem){
-    element.classList.add("d-none");
-}
-
-const clickHome = document.getElementById("accueil");
-clickHome.addEventListener("click", function() {
-    clearBasket();
-});

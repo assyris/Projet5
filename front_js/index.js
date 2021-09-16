@@ -1,6 +1,8 @@
 basketPreview();
+getApi();
 
-fetch('http://localhost:3000/api/teddies/')
+function getApi() {
+    fetch('http://localhost:3000/api/teddies/')
     .then(function(res) {
        return res.json()
     })
@@ -14,12 +16,13 @@ fetch('http://localhost:3000/api/teddies/')
         apiErr.innerHTML = "Veuillez démarrer le serveur";
         console.error(err);
     });
+}
 
 function blocProducts(data) {
     for (product of data) {
         const bloc = document.getElementById("bloc_products");       
         bloc.innerHTML += `
-      <div class="col-sm-12 col-md-6 col-lg-4">
+      <div class="jumbotron col-sm-12 col-md-6 col-lg-4">
           <div class="card border bg-light shadow p-3 mb-5 bg-body empty" >
               <div class="card-body">
                   <div class="row">
