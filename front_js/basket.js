@@ -3,85 +3,87 @@ basketPreview();
 const orderForm = document.getElementById("orderForm");
 const emptyBasket = document.getElementById("emptyBasket");
 
+hidShow();
 
-if (basket.length < 1) {
-    orderForm.classList.add("d-none");
-} else {
-    orderForm.classList.add("d-none");
-    emptyBasket.classList.add("d-none");
-    const fullBasket = document.getElementById("basket");
-    fullBasket.classList.toggle("d-none");
-    for (product of basket) {
-        productListTable(product);
-    }
-
-    function addProduct(e) {
-        const index = e.target.getAttribute("data-index");
-        basket[index].quantity++;
-        localStorage.setItem("teddy", JSON.stringify(basket));
-        location.reload();
-    }
-
-    const buttonAdd = document.getElementsByClassName("add");
+const buttonAdd = document.getElementsByClassName("add");
     for (add of buttonAdd) {
-        add.addEventListener("click", addProduct);
+        add.addEventListener("click", addQuantity);
     }
 
-    function minusProduct(e) {
-        const index = e.target.getAttribute("data-index");
-        if (basket[index].quantity > 1) {
-            basket[index].quantity--;
-        } else {
-            basket.splice(index, 1);
-        }
-        localStorage.setItem("teddy", JSON.stringify(basket));
-        location.reload();
-    }
-
-    const buttonMinus = document.getElementsByClassName("minus");
+const buttonMinus = document.getElementsByClassName("minus");
     for (minus of buttonMinus) {
-        minus.addEventListener("click", minusProduct);
+        minus.addEventListener("click", minusQuantity);
     }
 
-    function clearProduct(e) {
-        const index = e.target.getAttribute("data-index");
-        if (basket[index].quantity > 0) {
-            basket.splice(index, 1);
-        }
-        localStorage.setItem("teddy", JSON.stringify(basket));
-        location.reload();
-    }
-
-    const buttonclear = document.getElementsByClassName("clear");
+const buttonclear = document.getElementsByClassName("clear");
     for (clear of buttonclear) {
-        clear.addEventListener("click", clearProduct);
+        clear.addEventListener("click", clearQuantity);
     }
 
-    totalPrice();
+totalPrice();
+postOrder();
 
-    const validationBasket = document.getElementById("validationBasket");
-    const hideButton = document.getElementById("hideButton");
-    validationBasket.addEventListener("click", function() {
-        orderForm.classList.toggle("d-none");
-        hideButton.classList.add("d-none");
-    });
+function hidShow () {
+    if (basket.length < 1) {
+        orderForm.classList.add("d-none");
+    } else {
+        orderForm.classList.add("d-none");
+        emptyBasket.classList.add("d-none");
+        const fullBasket = document.getElementById("basket");
+        fullBasket.classList.toggle("d-none");
+        for (product of basket) {
+            productListTable(product);
+        }
 
-    const buttonClearBasket = document.getElementById("clearBasket");
-    buttonClearBasket.addEventListener("click", function() {
-        clearBasket();
-        location.reload();
-    });
-    postOrder();
-    
-
+        const validationBasket = document.getElementById("validationBasket");
+        const hideButton = document.getElementById("hideButton");
+        validationBasket.addEventListener("click", function() {
+            orderForm.classList.toggle("d-none");
+            hideButton.classList.add("d-none");
+        });       
+    };
 }
+
+const buttonClearBasket = document.getElementById("clearBasket");
+        buttonClearBasket.addEventListener("click", function() {
+            clearBasket();
+            location.reload();
+        });
+
+function addQuantity(e) {
+    const index = e.target.getAttribute("data-index");
+    basket[index].quantity++;
+    localStorage.setItem("teddy", JSON.stringify(basket));
+    location.reload();
+}
+
+function minusQuantity(e) {
+    const index = e.target.getAttribute("data-index");
+    if (basket[index].quantity > 1) {
+        basket[index].quantity--;
+    } else {
+        basket.splice(index, 1);
+    }
+    localStorage.setItem("teddy", JSON.stringify(basket));
+    location.reload();
+}
+
+function clearQuantity(e) {
+    const index = e.target.getAttribute("data-index");
+    if (basket[index].quantity > 0) {
+        basket.splice(index, 1);
+    }
+    localStorage.setItem("teddy", JSON.stringify(basket));
+    location.reload();
+}
+
 
 function postOrder() {
     const order = document.getElementById("order");
     const regexMail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/;
     const checkBox = document.getElementById("check");
-    order.addEventListener("click", function(e) {
-        
+
+    order.addEventListener("click", function(e) {       
         let contact = {
             firstName: document.getElementById("firstName").value,
             lastName: document.getElementById("lastName").value,
@@ -102,9 +104,9 @@ function postOrder() {
             
             let products = [];
             for (productsId of basket) {
-                products.push(productsId.id);
+                products.push(productsId._id);
             }
-
+            
             fetch("http://localhost:3000/api/teddies/order", {
                 method: "POST",
                 headers: {

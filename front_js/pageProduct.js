@@ -4,6 +4,7 @@ const params = new URL(document.location).searchParams;
 const id = params.get("_id");
 console.log(id);
 
+
 fetch('http://localhost:3000/api/teddies/' + id)
     .then(function(res) {
        return res.json()
@@ -12,6 +13,7 @@ fetch('http://localhost:3000/api/teddies/' + id)
         blocProduct(data);
         addNewProduct(data);      
 });
+
 
 function blocProduct(data) {   
     const bloc = document.getElementById("bloc_product");       
@@ -52,10 +54,10 @@ function blocProduct(data) {
                 </div>
             </div>
         </div>`;
-        addcolor(data);
+        addColor(data);
 }
 
-function addcolor(data) {
+function addColor(data) {
     const colorChoice = document.getElementById("option");
     for (let color of data.colors) {
         colorChoice.innerHTML += `<option value="${color}">${color}</option>`;
@@ -79,12 +81,10 @@ function addNewProduct(data) {
 
             if( basket.length > 0 ) {
                 newBasket = basket.map( item => {
-                    if(item._id === objectProduct._id && item.option === objectProduct.option){
-                        if( item.quantity === objectProduct.quantity) {
-                            item.quantity += 1;
-                        } else {
-                            item.quantity += objectProduct.quantity;
-                        }
+                    if( item._id === objectProduct._id && item.option === objectProduct.option ){   
+                        item.quantity += objectProduct.quantity;
+                    } else if( item._id === objectProduct._id && item.option !== objectProduct.option ){
+                        newBasket.push(objectProduct);
                     }
                     return new Product({...item});
                 });

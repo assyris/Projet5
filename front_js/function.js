@@ -25,10 +25,10 @@ function productListTable(product) {
             <span>${product.option}</span>
         </td>
         <td class="align-middle productQuantity">
-            <button type="button" class="empty minus" data-toggle="modal" data-target="#exampleModal" data-index="${indexProduct}"><span class="fas fa-minus-square text-danger" data-index="${indexProduct}"></span></button>
+            <button type="button" class="rounded minus" data-toggle="modal" data-target="#exampleModal" data-index="${indexProduct}"><span class="fas fa-minus-square text-danger" data-index="${indexProduct}"></span></button>
             <span class="mx-0 mx-lg-3"> ${product.quantity}</span>
-            <button type="button" class="empty add" data-toggle="modal" data-target="#exampleModal" data-index="${indexProduct}"><span class="fas fa-plus-square text-success" data-index="${indexProduct}"></span></button>
-            <button type="button" class="empty clear" data-toggle="modal" data-target="#exampleModal" data-index="${indexProduct}"><span class="fas fa-times-circle text-danger" data-index="${indexProduct}"></span></button>
+            <button type="button" class="rounded add" data-toggle="modal" data-target="#exampleModal" data-index="${indexProduct}"><span class="fas fa-plus-square text-success" data-index="${indexProduct}"></span></button>
+            <button type="button" class="rounded clear" data-toggle="modal" data-target="#exampleModal" data-index="${indexProduct}"><span class="fas fa-times-circle text-danger" data-index="${indexProduct}"></span></button>
         </td>
         <td class="align-middle">
             <span>${(product.price / 100 + "€")}</span>
