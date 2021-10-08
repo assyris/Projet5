@@ -1,22 +1,54 @@
 basketPreview();
-getApi();
+// getApi();
 
-function getApi() {
-    fetch('http://localhost:3000/api/teddies/')
-    .then(function(res) {
-       return res.json()
-    })
-    .then(function(data) {
-        blocProducts(data);
-    })
-    .catch(function(err) {
-        alert("Erreur : " + err);
-        apiErr = document.querySelector('#bloc_products');
-        apiErr.classList.add('msg__error');
-        apiErr.innerHTML = "Veuillez démarrer le serveur";
-        console.error(err);
-    });
+// function getApi() {
+//     fetch('http://localhost:3000/api/teddies/')
+//     .then(function(res) {
+//        return res.json()
+//     })
+//     .then(function(data) {
+//         blocProducts(data);
+//     })
+//     .catch(function(err) {
+//         alert("Erreur : " + err);
+//         apiErr = document.querySelector('#bloc_products');
+//         apiErr.classList.add('msg__error');
+//         apiErr.innerHTML = "Veuillez démarrer le serveur";
+//         console.error(err);
+//     });
+// }
+
+const endpoints = "api/teddies/";
+
+ const manageEnvironment = (endpoints) => {
+    if(!endpoints){
+      console.error("no endpoints");
+      return;
+    }
+    let urlBaseApi = `http://localhost:3000/${endpoints}`;
+    const urlSite = location.hostname;
+    if(urlSite.includes('github')) {
+        urlBaseApi = "/public/data/data.json";
+    }
+    return urlBaseApi;
 }
+
+ const requestApi = async(urlApi) => {
+    return await fetch(urlApi).then( (response) => response.json()).catch(error => {
+        console.error(error);
+        throw new Error(`Error: ${error.message}`);
+      });
+  }
+  
+ try {
+      const url = manageEnvironment('api/teddies');
+      requetsApi(url).then( (data) => {
+       const template = createTpl(data);
+       document.querySelector(".listing").innerHTML = template;
+     });
+  } catch(error) {
+    console.log(error);
+  }
 
 function blocProducts(data) {
     for (product of data) {
