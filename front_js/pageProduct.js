@@ -89,8 +89,11 @@ function addNewProduct(data) {
                     return new Product({...item});
                 });
 
-                if(!newBasket.find( item => objectProduct._id === item._id)) {
-                    newBasket.push(objectProduct);
+                const findingClone = newBasket.find( item => objectProduct._id === item._id);
+                if( !!findingClone ) {
+                    if(objectProduct.option !== findingClone.option) {
+                        newBasket.push(objectProduct);
+                    }
                 }
             }
             localStorage.setItem("teddy", JSON.stringify(newBasket));
