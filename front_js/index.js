@@ -43,8 +43,8 @@ const requestApi = async (urlApi) => {
 try {
     const url = manageEnvironment('api/teddies');
     requestApi(url).then((data) => {
-        const template = createTpl(data);
-        document.querySelector(".listing").innerHTML = template;
+        blocProducts(data);
+        // document.querySelector(".listing").innerHTML = template;
     });
 } catch (error) {
     console.log(error);

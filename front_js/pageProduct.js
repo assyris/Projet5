@@ -83,17 +83,18 @@ function addNewProduct(data) {
                 newBasket = basket.map( item => {
                     if( item._id === objectProduct._id && item.option === objectProduct.option ){   
                         item.quantity += objectProduct.quantity;
-                    } else if( item._id === objectProduct._id && item.option !== objectProduct.option ){
-                        newBasket.push(objectProduct);
                     }
                     return new Product({...item});
                 });
+
 
                 const findingClone = newBasket.find( item => objectProduct._id === item._id);
                 if( !!findingClone ) {
                     if(objectProduct.option !== findingClone.option) {
                         newBasket.push(objectProduct);
                     }
+                } else {
+                    newBasket.push(objectProduct);
                 }
             }
             localStorage.setItem("teddy", JSON.stringify(newBasket));
