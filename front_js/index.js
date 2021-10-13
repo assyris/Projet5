@@ -1,3 +1,4 @@
+
 basketPreview();
 // getApi();
 
@@ -17,6 +18,8 @@ basketPreview();
 //         console.error(err);
 //     });
 // }
+
+
 
 const endpoints = "api/teddies/";
 
@@ -49,6 +52,9 @@ try {
 } catch (error) {
     console.log(error);
 }
+
+
+
 
 function blocProducts(data) {
     for (product of data) {

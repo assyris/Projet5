@@ -4,7 +4,6 @@ const params = new URL(document.location).searchParams;
 const id = params.get("_id");
 console.log(id);
 
-
 fetch('http://localhost:3000/api/teddies/' + id)
     .then(function(res) {
        return res.json()
@@ -13,6 +12,40 @@ fetch('http://localhost:3000/api/teddies/' + id)
         blocProduct(data);
         addNewProduct(data);      
 });
+
+// const endpoints = "api/teddies/";
+
+// const manageEnvironment = (endpoints) => {
+//     if (!endpoints) {
+//         console.error("no endpoints");
+//         return;
+//     }
+//     let urlBaseApi = `http://localhost:3000/${endpoints}`;
+//     const urlSite = location.hostname;
+//     if (urlSite.includes('github')) {
+//         urlBaseApi = "./public/data/data.json";
+//     }
+//     return urlBaseApi;
+// }
+
+// const requestApi = async (urlApi) => {
+//     return await fetch(urlApi).then((response) => response.json()).catch(error => {
+//         console.error(error);
+//         throw new Error(`Error: ${error.message}`);
+//     });
+// }
+
+// try {
+//     const url = manageEnvironment('api/teddies' + id);
+//     requestApi(url).then((data) => {
+//         blocProduct(data);
+//         addNewProduct(data);
+//     });
+// } catch (error) {
+//     console.log(error);
+// }
+
+
 
 
 function blocProduct(data) {   
