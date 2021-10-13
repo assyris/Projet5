@@ -31,7 +31,7 @@ const manageEnvironment = (endpoints) => {
     let urlBaseApi = `http://localhost:3000/${endpoints}`;
     const urlSite = location.hostname;
     if (urlSite.includes('github')) {
-        urlBaseApi = "/public/data/data.json";
+        urlBaseApi = "/Projet5/public/data/data.json";
     }
     return urlBaseApi;
 }
